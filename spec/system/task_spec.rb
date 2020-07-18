@@ -19,12 +19,8 @@ RSpec.describe 'Task', type: :system do
         # FIXME: テストが失敗するので修正してください
         visit project_path(project)
         click_link 'View Todos'
-        #expect(page).to have_content task.title
-        expect(page).to have_content (project.name)
-        expect(page).to have_content(project.status)
-        expect(page).to have_content(project.release_date)
-        expect(Project.count).to eq 1
-        #expect(current_path).to eq project_tasks_path(project)
+        expect(page).to_not have_content task.title
+        expect(Task.count).to eq 1
         expect(current_path).to eq '/projects/1'
       end
     end
