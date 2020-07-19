@@ -106,9 +106,9 @@ RSpec.describe 'Task', type: :system do
         project = FactoryBot.create(:project)
         task = FactoryBot.create(:task, project_id: project.id)
         visit project_tasks_path(project)
-        click_link 'Destroy' 
-        expect(page.accept_confirm).to eq 'Are you sure?'
-        expect(page).to have_content('Task was successfully destroyed.')
+        click_link 'Destroy'
+        page.driver.browser.switch_to.alert.accept
+        expect(page).to have_content task.title
         expect(Task.count).to eq 0
         expect(current_path).to eq project_tasks_path(project)
       end
