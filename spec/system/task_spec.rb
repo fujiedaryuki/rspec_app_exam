@@ -10,7 +10,9 @@ RSpec.describe 'Task', type: :system do
       it '一覧ページにアクセスした場合、Taskが表示されること' do
         # TODO: ローカル変数ではなく let を使用してください
         visit project_tasks_path(project)
+        sleep(5)
         expect(page).to have_content task.title
+        sleep(5)
         expect(Task.count).to eq 1
         expect(current_path).to eq project_tasks_path(project)
       end
@@ -93,7 +95,7 @@ RSpec.describe 'Task', type: :system do
         select 'todo', from: 'Status'
         click_button 'Update Task'
         expect(page).to have_content('todo')
-        expect(page).not_to have_content(Time.current.strftime('%-m/%d %-H:%M'))
+        expect(page).not_to have_content(Time.current.strftime('%Y-%m-%d %H:%M'))
         expect(current_path).to eq project_task_path(project, task)
       end
     end
