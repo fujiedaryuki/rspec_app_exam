@@ -10,9 +10,7 @@ RSpec.describe 'Task', type: :system do
       it '一覧ページにアクセスした場合、Taskが表示されること' do
         # TODO: ローカル変数ではなく let を使用してください
         visit project_tasks_path(project)
-        sleep(5)
         expect(page).to have_content task.title
-        sleep(5)
         expect(Task.count).to eq 1
         expect(current_path).to eq project_tasks_path(project)
       end
@@ -21,9 +19,10 @@ RSpec.describe 'Task', type: :system do
         # FIXME: テストが失敗するので修正してください
         visit project_path(project)
         click_link 'View Todos'
-        expect(page).to_not have_content task.title
+        switch_to_window(windows.last)
+        expect(page).to have_content task.title
         expect(Task.count).to eq 1
-        expect(current_path).to eq '/projects/1'
+        expect(current_path).to eq '/projects/1/tasks'
       end
     end
   end
