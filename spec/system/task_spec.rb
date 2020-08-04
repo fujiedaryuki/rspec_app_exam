@@ -94,7 +94,7 @@ RSpec.describe 'Task', type: :system do
         select 'todo', from: 'Status'
         click_button 'Update Task'
         expect(page).to have_content('todo')
-        expect(page).not_to have_content(Time.current.strftime('%Y-%m-%d %H:%M'))
+        expect(page).not_to have_content(Time.current.strftime('%Y-%m-%d'))
         expect(current_path).to eq project_task_path(project, task)
       end
     end
